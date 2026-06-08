@@ -496,7 +496,3 @@ const App = () => {
 };
 
 export default App;
-
-file_path: /home/user/exam-system/src/App.jsx
-
-File has been modified since read, either by the user or by a linter. Read it again before attempting to write it.
