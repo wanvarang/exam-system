@@ -1,4 +1,3 @@
-content: import React, { useState, useEffect, useRef } from 'react';
 import {
   Form, Select, Button, Card, message, Spin, Slider, InputNumber,
   Tabs, Table, Tag, Badge, Space, Typography, Divider, Input,
