@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Form, Select, Button, Card, message, Spin, Slider, InputNumber,
-  Tabs, Table, Tag, Badge, Space, Typography, Divider, DatePicker, TimePicker, Input
+  Tabs, Table, Tag, Badge, Space, Typography, Divider, Input
 } from 'antd';
 import {
   FormOutlined, UnorderedListOutlined, CheckCircleOutlined,
@@ -9,7 +9,6 @@ import {
 } from '@ant-design/icons';
 import { db } from './firebase-config';
 import { collection, getDocs, addDoc, updateDoc, doc, orderBy, query } from 'firebase/firestore';
-import dayjs from 'dayjs';
 import './index.css';
 
 const { Option } = Select;
@@ -83,8 +82,6 @@ const App = () => {
     try {
       await addDoc(collection(db, 'Exam_Requests'), {
         ...values,
-        examDate: values.examDate ? values.examDate.format('YYYY-MM-DD') : null,
-        examTime: values.examTime ? values.examTime.format('HH:mm') : null,
         duration: durationValue,
         status: 'pending',
         timestamp: new Date(),
@@ -240,25 +237,6 @@ const App = () => {
                             {generateClassOptions()}
                           </Select>
                         </Form.Item>
-
-                        <div className="grid grid-cols-2 gap-4">
-                          <Form.Item name="examDate" label="วันที่สอบ">
-                            <DatePicker
-                              style={{ width: '100%' }}
-                              placeholder="เลือกวันที่"
-                              format="DD/MM/YYYY"
-                              disabledDate={(d) => d && d < dayjs().startOf('day')}
-                            />
-                          </Form.Item>
-                          <Form.Item name="examTime" label="เวลาเริ่มสอบ">
-                            <TimePicker
-                              style={{ width: '100%' }}
-                              placeholder="เลือกเวลา"
-                              format="HH:mm"
-                              minuteStep={15}
-                            />
-                          </Form.Item>
-                        </div>
 
                         <Form.Item label={`เวลาที่ใช้สอบ — ${durationValue} นาที`}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
